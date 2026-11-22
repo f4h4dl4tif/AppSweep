@@ -1,0 +1,20 @@
+How to install AppSweep
+=======================
+
+1. Drag AppSweep onto the Applications folder in this window.
+
+2. Open AppSweep from Applications. macOS will say it "could not verify AppSweep
+   is free of malware". This happens because AppSweep isn't notarized by Apple.
+   Click "Done" (don't move it to the Bin).
+
+3. Open System Settings > Privacy & Security, scroll down to the Security
+   section, and click "Open Anyway" next to AppSweep. Enter your password and
+   click "Open Anyway" again. You only need to do this once.
+
+   Alternative (Terminal), after copying AppSweep to Applications:
+       xattr -dr com.apple.quarantine /Applications/AppSweep.app
+
+4. When AppSweep opens, follow its setup screen to turn on Full Disk Access and
+   App Management, then click Relaunch.
+
+Requires a Mac with Apple Silicon (M1 or newer) and macOS 14 Sonoma or later.
