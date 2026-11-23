@@ -56,5 +56,8 @@ struct AppSweepApp: App {
                     .keyboardShortcut("r")
             }
         }
+        Settings {
+            SettingsView()
+        }
     }
 }

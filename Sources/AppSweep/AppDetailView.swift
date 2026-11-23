@@ -111,6 +111,7 @@ struct OrphanView: View {
 struct CleanupView<Header: View>: View {
     @ObservedObject var model: CleanupModel
     @ObservedObject var permissions = Permissions.shared
+    @AppStorage(GlassTheme.key) private var glassTheme = false
     let removeLabel: String
     let emptyTitle: String
     let header: Header
@@ -127,10 +128,10 @@ struct CleanupView<Header: View>: View {
         fileList
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .safeAreaInset(edge: .top, spacing: 0) {
-                VStack(spacing: 0) { header; Divider() }.background(.bar)
+                header.sweepBar(glass: glassTheme, edge: .top)
             }
             .safeAreaInset(edge: .bottom, spacing: 0) {
-                VStack(spacing: 0) { Divider(); footer }.background(.bar)
+                footer.sweepBar(glass: glassTheme, edge: .bottom)
             }
         .alert(alertTitle, isPresented: Binding(get: { model.alert != nil }, set: { if !$0 { model.alert = nil } }),
                presenting: model.alert) { a in
@@ -206,7 +207,7 @@ struct CleanupView<Header: View>: View {
                     Label(removeLabel, systemImage: "trash")
                 }
             }
-            .buttonStyle(.borderedProminent)
+            .sweepProminentButton(glass: glassTheme)
             .tint(.red)
             .controlSize(.large)
             .disabled(model.selected.isEmpty || model.isScanning || model.isRemoving)

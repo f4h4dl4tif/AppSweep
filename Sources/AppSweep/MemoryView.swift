@@ -10,6 +10,7 @@ private enum MemColors {
 
 struct MemoryView: View {
     @ObservedObject var monitor = MemoryMonitor.shared
+    @AppStorage(GlassTheme.key) private var glassTheme = false
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -95,7 +96,7 @@ struct MemoryView: View {
             .frame(maxWidth: .infinity)
         }
         .padding(18)
-        .background(.background.secondary.opacity(0.5), in: RoundedRectangle(cornerRadius: 12))
+        .sweepCard(glass: glassTheme)
     }
 
     // MARK: Free up
@@ -127,13 +128,13 @@ struct MemoryView: View {
                     Label("Free Up Memory", systemImage: "sparkles").frame(minWidth: 120)
                 }
             }
-            .buttonStyle(.borderedProminent)
+            .sweepProminentButton(glass: glassTheme)
             .tint(.teal)
             .controlSize(.large)
             .disabled(monitor.isFreeing)
         }
         .padding(18)
-        .background(.background.secondary.opacity(0.5), in: RoundedRectangle(cornerRadius: 12))
+        .sweepCard(glass: glassTheme)
     }
 
     // MARK: Top apps
@@ -180,7 +181,7 @@ struct MemoryView: View {
             }
         }
         .padding(18)
-        .background(.background.secondary.opacity(0.5), in: RoundedRectangle(cornerRadius: 12))
+        .sweepCard(glass: glassTheme)
     }
 }
 
